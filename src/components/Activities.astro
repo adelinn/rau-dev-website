@@ -1,0 +1,88 @@
+---
+import { activities } from "../data/content";
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section class="section" aria-labelledby="activities-title">
+  <div class="container">
+    <SectionHeading
+      id="activities-title"
+      index="01"
+      eyebrow="What we do"
+      title="Five ways to turn curiosity into practice."
+      lead="We’ll start small, then build on what members find useful."
+    />
+    <ul class="list" role="list">
+      {activities.map((activity) => (
+        <li class="row">
+          <span class="icon">
+            <Icon name={activity.icon} />
+          </span>
+          <h3>{activity.title}</h3>
+          <p>{activity.description}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 1rem;
+    align-items: center;
+    padding: 1.125rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
+  }
+
+  .row:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+  }
+
+  .icon {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 10px;
+    background: rgb(37 230 187 / 0.1);
+    color: var(--accent);
+  }
+
+  h3 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 44rem) {
+    .row {
+      grid-template-columns: auto 16rem 1fr;
+    }
+
+    .icon {
+      grid-row: auto;
+    }
+  }
+</style>

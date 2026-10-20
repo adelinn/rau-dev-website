@@ -1,0 +1,81 @@
+---
+import { principles } from "../data/content";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section class="section culture" aria-labelledby="culture-title">
+  <div class="container">
+    <SectionHeading
+      id="culture-title"
+      index="02"
+      eyebrow="Our culture"
+      title="A few principles make a strong community."
+      lead="The kind of club we build depends on how we treat one another."
+    />
+    <ul class="grid" role="list">
+      {principles.map((principle) => (
+        <li class:list={["card", principle.tone]}>
+          <h3>{principle.title}</h3>
+          <p>{principle.description}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .culture {
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgb(8 39 58 / 0.45),
+      transparent
+    );
+  }
+
+  .grid {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 44rem) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .card {
+    --tone: var(--accent);
+    padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--tone);
+    border-radius: var(--radius);
+  }
+
+  .blue {
+    --tone: var(--blue);
+  }
+
+  .purple {
+    --tone: var(--purple);
+  }
+
+  .amber {
+    --tone: var(--amber);
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+</style>

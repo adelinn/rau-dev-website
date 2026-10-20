@@ -1,0 +1,40 @@
+{
+  "name": "rau-dev-website",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RAU DEV — the software engineering club at the Romanian-American University.",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "dev": "bun --bun astro dev",
+    "build": "bun --bun astro check && bun --bun astro build",
+    "preview": "wrangler pages dev ./dist",
+    "check": "bun --bun astro check",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "pages:deploy": "pnpm build && wrangler pages deploy ./dist"
+  },
+  "dependencies": {
+    "@astrojs/react": "^7.1.0",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "astro": "^7.4.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.11",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.1",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5",
+    "wrangler": "^4.151.3"
+  }
+}

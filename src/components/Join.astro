@@ -1,0 +1,110 @@
+---
+import { club } from "../data/content";
+---
+
+<section id="join" class="section join" aria-labelledby="join-title">
+  <div class="container panel">
+    <div>
+      <p class="wordmark">{club.name}</p>
+      <p class="tagline">
+        {club.tagline.map((line) => (
+          <span>{line}</span>
+        ))}
+      </p>
+    </div>
+    <div class="cta">
+      <h2 id="join-title">What will you help us build first?</h2>
+      <p class="topics">Questions • Ideas • Introductions</p>
+      <a
+        class="instagram"
+        href={club.instagram.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+          <circle cx="12" cy="12" r="4"></circle>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"></circle>
+        </svg>
+        <span>{club.instagram.handle}</span>
+        <span class="visually-hidden">on Instagram (opens in a new tab)</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .panel {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 52rem) {
+    .panel {
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+    }
+  }
+
+  .wordmark {
+    color: var(--accent);
+    font-size: clamp(2.25rem, 6vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    margin-top: 1.5rem;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .tagline span {
+    display: block;
+  }
+
+  .cta {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  h2 {
+    color: var(--accent-soft);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+  }
+
+  .topics {
+    margin-top: 0.75rem;
+    color: var(--muted);
+  }
+
+  .instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-top: 1.75rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .instagram:hover {
+    background: var(--accent-soft);
+    color: var(--bg);
+  }
+</style>

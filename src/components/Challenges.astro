@@ -1,0 +1,18 @@
+---
+import { challenges, presenceXp } from "../data/content";
+import ChallengeBoard from "./ChallengeBoard";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="challenges" class="section" aria-labelledby="challenges-title">
+  <div class="container">
+    <SectionHeading
+      id="challenges-title"
+      index="03"
+      eyebrow="Challenges"
+      title="Warm up, then level up."
+      lead={`Every session comes with problems to solve. Showing up earns +${presenceXp} xp; the challenges below earn the rest.`}
+    />
+    <ChallengeBoard client:visible challenges={challenges} />
+  </div>
+</section>

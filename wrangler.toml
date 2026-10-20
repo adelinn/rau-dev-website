@@ -1,0 +1,5 @@
+# Cloudflare Pages project configuration.
+# https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+name = "rau-dev-website"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-10-01"

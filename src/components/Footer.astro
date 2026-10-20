@@ -1,0 +1,35 @@
+---
+import { club } from "../data/content";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container row mono">
+    <p>
+      {club.name} • {club.label}
+    </p>
+    <p>
+      © {year} · {club.university}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>
