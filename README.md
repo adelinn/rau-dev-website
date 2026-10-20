@@ -7,21 +7,19 @@ Built with [Astro](https://astro.build) (static output, bundled by [Vite](https:
 ## Requirements
 
 - Node.js 22.22+ (see `.node-version`)
-- pnpm 10 (exact version and checksum pinned via `packageManager`; `corepack enable` picks it up)
+- pnpm 12 (exact version and checksum pinned via `packageManager`; any installed pnpm switches to it automatically)
 - Bun (see `.bun-version`)
 
 ## Scripts
 
-| Command             | What it does                                            |
-| ------------------- | ------------------------------------------------------- |
-| `pnpm install`      | Install dependencies                                    |
-| `pnpm dev`          | Start the dev server at `http://localhost:4321`         |
-| `pnpm check`        | Type-check `.astro`, `.ts` and `.tsx` files             |
-| `pnpm test`         | Run unit tests with Vitest                              |
-| `pnpm build`        | Type-check, then build the static site into `dist/`     |
-| `pnpm preview`      | Serve `dist/` locally with the Cloudflare Pages runtime |
-| `pnpm format`       | Format the code with Prettier                           |
-| `pnpm pages:deploy` | Build and deploy with Wrangler                          |
+| Command        | What it does                                        |
+| -------------- | --------------------------------------------------- |
+| `pnpm install` | Install dependencies                                |
+| `pnpm dev`     | Start the dev server at `http://localhost:4321`     |
+| `pnpm test`    | Run unit tests with Vitest                          |
+| `pnpm build`   | Type-check, then build the static site into `dist/` |
+| `pnpm preview` | Serve the built site locally                        |
+| `pnpm format`  | Format the code with Prettier                       |
 
 ## Project structure
 
@@ -32,7 +30,7 @@ src/
   data/content.ts    All page copy: activities, meeting details, sign-up link, challenges
   layouts/           Base HTML document (meta tags, fonts, global styles)
   lib/               Framework-free logic with unit tests
-  pages/             Routes: `/`, `404`, `robots.txt`
+  pages/             Routes: `/` and `404`
   styles/global.css  Design tokens (colours and type) matching the club poster
 ```
 
@@ -49,9 +47,7 @@ Connect the repository in the Cloudflare dashboard (**Workers & Pages → Create
 | Build output directory | `dist`                                                                                                   |
 | Environment variables  | `BUN_VERSION` (same as `.bun-version`), and `SITE_URL=https://<your-domain>` once a custom domain is set |
 
-Cloudflare reads the Node.js version from `.node-version` and the pnpm version from `package.json`. The site is fully static, so no adapter or Functions are needed. Security and caching headers live in `public/_headers`, and Astro adds a hashed Content-Security-Policy to every page.
-
-Alternatively, deploy from your machine with `pnpm pages:deploy` after `pnpm wrangler login`.
+Cloudflare reads the Node.js version from `.node-version`, and pnpm switches itself to the version pinned in `package.json`. The site is fully static, so no adapter or Functions are needed. Security and caching headers live in `public/_headers`, and Astro adds a hashed Content-Security-Policy to every page.
 
 ## Supply-chain protections
 
@@ -61,6 +57,6 @@ Alternatively, deploy from your machine with `pnpm pages:deploy` after `pnpm wra
   - `minimumReleaseAge`: new versions must be at least 3 days old before they can be installed.
   - `trustPolicy: no-downgrade`: an install fails if a package lost the provenance its earlier versions had. Reviewed exceptions are listed under `trustPolicyExclude`, each with a reason.
   - `blockExoticSubdeps`: transitive dependencies must come from the npm registry, not git or tarball URLs.
-  - `strictDepBuilds` and `onlyBuiltDependencies`: only allow-listed packages may run install scripts; any other package that tries makes the install fail.
+  - `strictDepBuilds` and `allowBuilds`: only approved packages may run install scripts; any other package that tries makes the install fail.
 - **GitHub Actions:** every action is pinned to a full commit SHA, the workflow token has no permissions by default (read-only per job), and checkout doesn't keep credentials. CI also runs `pnpm audit`.
 - **Dependabot** updates npm packages and actions weekly, waiting 7 days after a release before proposing it.

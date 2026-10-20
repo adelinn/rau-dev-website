@@ -18,13 +18,11 @@ trustPolicyExclude:
 # repositories or arbitrary tarball URLs.
 blockExoticSubdeps: true
 
-# Dependency install scripts are blocked unless listed here, and an unlisted
-# package that wants to run one fails the install instead of being skipped.
+# Dependency install scripts only run for packages approved here; any other
+# package with one fails the install instead of being silently skipped.
 strictDepBuilds: true
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
-  - workerd
+allowBuilds:
+  esbuild: true
 
 # Save exact versions to package.json; the lockfile pins the full tree.
 savePrefix: ""
