@@ -1,5 +1,32 @@
-# Only these dependencies may run install scripts (pnpm >= 10 blocks them by default).
+# pnpm settings (https://pnpm.io/settings). Most of these harden installs against
+# supply-chain attacks.
+
+# Only resolve versions published at least 3 days ago, so compromised releases
+# are usually caught and pulled before they reach this project.
+minimumReleaseAge: 4320
+
+# Fail if a package's publishing trust (provenance / trusted publisher) is
+# weaker than for its earlier versions, a common sign of a hijacked account.
+trustPolicy: no-downgrade
+# Reviewed exceptions: exact versions only, each with a reason.
+trustPolicyExclude:
+  # Published by its long-time maintainer in Dec 2024 without provenance;
+  # widely used since (via @astrojs/check).
+  - chokidar@4.0.3
+
+# Transitive dependencies may only come from the registry, never from git
+# repositories or arbitrary tarball URLs.
+blockExoticSubdeps: true
+
+# Dependency install scripts are blocked unless listed here, and an unlisted
+# package that wants to run one fails the install instead of being skipped.
+strictDepBuilds: true
 onlyBuiltDependencies:
   - esbuild
   - sharp
   - workerd
+
+# Save exact versions to package.json; the lockfile pins the full tree.
+savePrefix: ""
+
+engineStrict: true
