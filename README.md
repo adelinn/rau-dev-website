@@ -6,7 +6,7 @@ Built with [Astro](https://astro.build) (static output, bundled by [Vite](https:
 
 ## Requirements
 
-- Node.js 22.22+ (see `.node-version`)
+- Node.js 26 (see `.node-version`)
 - pnpm 12 (exact version and checksum pinned via `packageManager`; any installed pnpm switches to it automatically)
 - Bun (see `.bun-version`)
 
