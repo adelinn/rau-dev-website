@@ -1,0 +1,61 @@
+---
+import { club } from "../data/content";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <p class="label place">
+      <span>{club.university}</span>
+      <span class="dot" aria-hidden="true">
+        •
+      </span>
+      <span>{club.city}</span>
+    </p>
+    <p class="copyright">
+      © {year} {club.name} club at {club.university}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: 3rem;
+    text-align: center;
+  }
+
+  .place::before {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 2px;
+    margin: 0 auto 1.5rem;
+    background: var(--border);
+  }
+
+  .place {
+    color: var(--muted);
+  }
+
+  .dot {
+    margin-inline: 0.75em;
+  }
+
+  /* Stack the two parts on narrow screens instead of leaving a dangling bullet. */
+  @media (max-width: 30rem) {
+    .place span {
+      display: block;
+    }
+
+    .place .dot {
+      display: none;
+    }
+  }
+
+  .copyright {
+    margin-top: 0.75rem;
+    color: color-mix(in srgb, var(--muted) 70%, transparent);
+    font-size: 0.8125rem;
+  }
+</style>

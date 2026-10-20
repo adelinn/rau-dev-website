@@ -1,0 +1,213 @@
+---
+import { club, details } from "../data/content";
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="join" class="section" aria-labelledby="join-title">
+  <div class="container">
+    <SectionHeading
+      id="join-title"
+      eyebrow="Join us"
+      title="Come build with us."
+    />
+    <div class="grid">
+      <div class="info">
+        <dl class="details">
+          {details.map((detail) => (
+            <div class="detail">
+              <span class:list={["tile", `tone-${detail.tone}`]}>
+                <Icon name={detail.icon} size={26} />
+              </span>
+              <div>
+                <dt class="label">{detail.label}</dt>
+                <dd class="value">{detail.value}</dd>
+                {detail.note && <dd class="note">{detail.note}</dd>}
+              </div>
+            </div>
+          ))}
+        </dl>
+
+        <p class="banner">
+          <span class="bulb">
+            <Icon name="bulb" size={30} />
+          </span>
+          <span>
+            No matter your experience level, if you’re curious about software
+            engineering,{" "}
+            <strong>there’s a place for you at {club.name}.</strong>
+          </span>
+        </p>
+      </div>
+
+      <div class="signup">
+        <span class="form-icon">
+          <Icon name="form" size={28} />
+        </span>
+        <h3>
+          Complete the form and join <span>{club.name}!</span>
+        </h3>
+        <p>
+          Fill in a short form to express your interest and become part of our
+          community!
+        </p>
+        <a
+          class="cta"
+          href={club.signupUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open the sign-up form <Icon name="arrow" size={18} />
+          <span class="visually-hidden">(opens in a new tab)</span>
+        </a>
+        <a
+          class="instagram"
+          href={club.instagram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="instagram" size={20} />
+          {club.instagram.handle}
+          <span class="visually-hidden">on Instagram (opens in a new tab)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  @media (min-width: 56rem) {
+    .grid {
+      grid-template-columns: 1.15fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .details {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .detail {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  dt {
+    color: var(--muted);
+  }
+
+  .value {
+    margin-top: 0.35rem;
+    font-size: clamp(1.375rem, 3vw, 1.75rem);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+
+  .note {
+    margin-top: 0.25rem;
+    color: var(--muted);
+  }
+
+  .banner {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    margin-top: 2.5rem;
+    padding: 1.5rem clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--muted);
+  }
+
+  .bulb {
+    flex: none;
+    color: var(--accent);
+  }
+
+  .banner strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .signup {
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    background: var(--mint-card);
+    border-radius: var(--radius-lg);
+    color: var(--ink);
+  }
+
+  .form-icon {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+  }
+
+  h3 {
+    margin-top: 1.5rem;
+    font-size: clamp(1.25rem, 2.6vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  h3 span {
+    display: block;
+    margin-top: 0.15em;
+    color: var(--green);
+    font-size: 1.5em;
+  }
+
+  .signup p {
+    margin-top: 1rem;
+    color: color-mix(in srgb, var(--ink) 85%, transparent);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--mint-card);
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .cta:hover {
+    background: var(--bg);
+    color: var(--accent);
+  }
+
+  .instagram {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    margin-top: 1.5rem;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .instagram:hover {
+    color: var(--green);
+  }
+
+  .signup :focus-visible {
+    outline-color: var(--ink);
+  }
+</style>

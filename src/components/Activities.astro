@@ -1,0 +1,94 @@
+---
+import { activities } from "../data/content";
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section class="section" aria-labelledby="activities-title">
+  <div class="container">
+    <SectionHeading
+      id="activities-title"
+      eyebrow="What we do"
+      title="Five ways to turn curiosity into practice."
+      lead="We’ll start small, then build on what members find useful."
+    />
+    <ul class="grid" role="list">
+      {activities.map((activity) => (
+        <li class="item">
+          <span class:list={["tile", `tone-${activity.tone}`]}>
+            <Icon name={activity.icon} size={26} />
+          </span>
+          <h3>{activity.title}</h3>
+          <p>{activity.description}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1.25rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tile {
+    grid-row: span 2;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  /* Five columns divided by thin rules, as on the poster. */
+  @media (min-width: 64rem) {
+    .grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .item {
+      grid-template-columns: 1fr;
+      align-content: start;
+      padding: 0 1.5rem;
+      border-top: 0;
+      border-left: 1px solid var(--border);
+    }
+
+    .item:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .item:last-child {
+      padding-right: 0;
+      border-bottom: 0;
+    }
+
+    .tile {
+      grid-row: auto;
+      margin-bottom: 1.25rem;
+    }
+  }
+</style>
