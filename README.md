@@ -7,8 +7,8 @@ Built with [Astro](https://astro.build) (static output, bundled by [Vite](https:
 ## Requirements
 
 - Node.js 22.22+ (see `.node-version`)
-- pnpm 10 (pinned via `packageManager`; `corepack enable` picks it up)
-- Bun 1.x
+- pnpm 10 (exact version and checksum pinned via `packageManager`; `corepack enable` picks it up)
+- Bun (see `.bun-version`)
 
 ## Scripts
 
@@ -29,11 +29,11 @@ Built with [Astro](https://astro.build) (static output, bundled by [Vite](https:
 public/              Static files copied as-is (favicon, Cloudflare `_headers`)
 src/
   components/        Astro sections and the React `ChallengeBoard` island
-  data/content.ts    All page copy: activities, principles, challenges
+  data/content.ts    All page copy: activities, meeting details, sign-up link, challenges
   layouts/           Base HTML document (meta tags, fonts, global styles)
   lib/               Framework-free logic with unit tests
   pages/             Routes: `/`, `404`, `robots.txt`
-  styles/global.css  Design tokens taken from the club presentation
+  styles/global.css  Design tokens (colours and type) matching the club poster
 ```
 
 To change the text on the site, edit `src/data/content.ts`.
@@ -42,13 +42,25 @@ To change the text on the site, edit `src/data/content.ts`.
 
 Connect the repository in the Cloudflare dashboard (**Workers & Pages → Create → Pages → Connect to Git**) with:
 
-| Setting                | Value                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------- |
-| Framework preset       | Astro                                                                                 |
-| Build command          | `pnpm build`                                                                          |
-| Build output directory | `dist`                                                                                |
-| Environment variables  | `BUN_VERSION=1.4.2`, and `SITE_URL=https://<your-domain>` once a custom domain is set |
+| Setting                | Value                                                                                                    |
+| ---------------------- | -------------------------------------------------------------------------------------------------------- |
+| Framework preset       | Astro                                                                                                    |
+| Build command          | `pnpm build`                                                                                             |
+| Build output directory | `dist`                                                                                                   |
+| Environment variables  | `BUN_VERSION` (same as `.bun-version`), and `SITE_URL=https://<your-domain>` once a custom domain is set |
 
 Cloudflare reads the Node.js version from `.node-version` and the pnpm version from `package.json`. The site is fully static, so no adapter or Functions are needed. Security and caching headers live in `public/_headers`, and Astro adds a hashed Content-Security-Policy to every page.
 
 Alternatively, deploy from your machine with `pnpm pages:deploy` after `pnpm wrangler login`.
+
+## Supply-chain protections
+
+- **Pinned toolchain:** `packageManager` pins pnpm to an exact version and SHA-512 checksum; Node.js and Bun versions are pinned in `.node-version` and `.bun-version`.
+- **Exact dependencies:** `package.json` uses exact versions and `pnpm-lock.yaml` pins the full tree; CI installs with `--frozen-lockfile`.
+- **pnpm hardening** (`pnpm-workspace.yaml`):
+  - `minimumReleaseAge`: new versions must be at least 3 days old before they can be installed.
+  - `trustPolicy: no-downgrade`: an install fails if a package lost the provenance its earlier versions had. Reviewed exceptions are listed under `trustPolicyExclude`, each with a reason.
+  - `blockExoticSubdeps`: transitive dependencies must come from the npm registry, not git or tarball URLs.
+  - `strictDepBuilds` and `onlyBuiltDependencies`: only allow-listed packages may run install scripts; any other package that tries makes the install fail.
+- **GitHub Actions:** every action is pinned to a full commit SHA, the workflow token has no permissions by default (read-only per job), and checkout doesn't keep credentials. CI also runs `pnpm audit`.
+- **Dependabot** updates npm packages and actions weekly, waiting 7 days after a release before proposing it.

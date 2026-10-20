@@ -5,7 +5,7 @@ import Base from "../layouts/Base.astro";
 
 <Base title="Page not found · RAU DEV">
   <main id="main" class="container not-found">
-    <p class="mono code">404 // not found</p>
+    <p class="label code">404 · Not found</p>
     <h1>This route isn’t built yet.</h1>
     <a href="/">Back to the homepage</a>
   </main>
@@ -22,10 +22,11 @@ import Base from "../layouts/Base.astro";
 
   .code {
     color: var(--accent);
-    font-weight: 600;
   }
 
   h1 {
     font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
   }
 </style>

@@ -7,14 +7,13 @@ import SectionHeading from "./SectionHeading.astro";
   <div class="container">
     <SectionHeading
       id="culture-title"
-      index="02"
       eyebrow="Our culture"
       title="A few principles make a strong community."
       lead="The kind of club we build depends on how we treat one another."
     />
     <ul class="grid" role="list">
       {principles.map((principle) => (
-        <li class:list={["card", principle.tone]}>
+        <li class:list={["card", `tone-${principle.tone}`]}>
           <h3>{principle.title}</h3>
           <p>{principle.description}</p>
         </li>
@@ -48,7 +47,6 @@ import SectionHeading from "./SectionHeading.astro";
   }
 
   .card {
-    --tone: var(--accent);
     padding: 1.5rem 1.5rem 1.5rem 1.75rem;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -56,20 +54,8 @@ import SectionHeading from "./SectionHeading.astro";
     border-radius: var(--radius);
   }
 
-  .blue {
-    --tone: var(--blue);
-  }
-
-  .purple {
-    --tone: var(--purple);
-  }
-
-  .amber {
-    --tone: var(--amber);
-  }
-
   h3 {
-    font-size: 1.125rem;
+    font-size: 1.1875rem;
     font-weight: 700;
   }
 

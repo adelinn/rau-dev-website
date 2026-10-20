@@ -1,20 +1,37 @@
 export const club = {
   name: "RAU DEV",
   university: "Romanian-American University",
+  city: "Bucharest",
   label: "Software Engineering Club",
   description:
     "A student-led community for people curious about software engineering.",
-  tagline: ["Build skills.", "Share knowledge.", "Engineer together."],
+  tagline: ["Build Skills.", "Share Knowledge.", "Engineer Together."],
+  signupUrl:
+    "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=Fa--e4Wf-020_9kgcQfNfchESy1MQ3pAnsE6zKK_XZBUM1hQRUM3U0pYTkowWUw5SksxQjFOTURGOC4u",
   instagram: {
     handle: "@raudev.club",
     url: "https://www.instagram.com/raudev.club/",
   },
 } as const;
 
-export type IconName = "code" | "target" | "gear" | "mic" | "spark";
+export type IconName =
+  | "code"
+  | "users"
+  | "gear"
+  | "mic"
+  | "group"
+  | "calendar"
+  | "pin"
+  | "form"
+  | "bulb"
+  | "instagram"
+  | "arrow";
+
+export type Tone = "mint" | "blue" | "amber" | "purple" | "green";
 
 export interface Activity {
   icon: IconName;
+  tone: Tone;
   title: string;
   description: string;
 }
@@ -22,32 +39,69 @@ export interface Activity {
 export const activities: Activity[] = [
   {
     icon: "code",
-    title: "Coding challenges",
-    description: "Solve problems and explain your approach.",
+    tone: "mint",
+    title: "Coding Challenges",
+    description:
+      "Solve problems, improve your skills, and think like an engineer.",
   },
   {
-    icon: "target",
-    title: "Mock interviews",
-    description: "Practise technical and behavioural questions.",
+    icon: "users",
+    tone: "blue",
+    title: "Mock Interviews",
+    description:
+      "Practice technical and behavioral interviews with your peers.",
   },
   {
     icon: "gear",
-    title: "Engineering workshops",
-    description: "Explore Git, testing, APIs, and more.",
+    tone: "amber",
+    title: "Engineering Workshops",
+    description: "Learn practical tools, technologies and best practices.",
   },
   {
     icon: "mic",
-    title: "Guest speakers",
-    description: "Hear honest stories from industry professionals.",
+    tone: "purple",
+    title: "Guest Speakers",
+    description: "Meet industry professionals and gain real-world insights.",
   },
   {
-    icon: "spark",
-    title: "Projects & networking",
-    description: "Meet teammates and build something useful.",
+    icon: "group",
+    tone: "green",
+    title: "Community & Networking",
+    description:
+      "Connect with like-minded students and collaborate on projects.",
   },
 ];
 
-export type Tone = "mint" | "blue" | "purple" | "amber";
+export interface Detail {
+  icon: IconName;
+  tone: Tone;
+  label: string;
+  value: string;
+  note?: string;
+}
+
+export const details: Detail[] = [
+  {
+    icon: "calendar",
+    tone: "blue",
+    label: "When?",
+    value: "Fridays, 11:00 – 14:00",
+  },
+  {
+    icon: "pin",
+    tone: "mint",
+    label: "Where?",
+    value: "Room 515",
+    note: "Romanian-American University",
+  },
+  {
+    icon: "group",
+    tone: "purple",
+    label: "Who can join?",
+    value: "All RAU students",
+    note: "Beginners and experienced developers are welcome!",
+  },
+];
 
 export interface Principle {
   title: string;

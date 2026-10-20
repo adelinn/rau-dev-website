@@ -8,16 +8,15 @@ import SectionHeading from "./SectionHeading.astro";
   <div class="container">
     <SectionHeading
       id="activities-title"
-      index="01"
       eyebrow="What we do"
       title="Five ways to turn curiosity into practice."
       lead="We’ll start small, then build on what members find useful."
     />
-    <ul class="list" role="list">
+    <ul class="grid" role="list">
       {activities.map((activity) => (
-        <li class="row">
-          <span class="icon">
-            <Icon name={activity.icon} />
+        <li class="item">
+          <span class:list={["tile", `tone-${activity.tone}`]}>
+            <Icon name={activity.icon} size={26} />
           </span>
           <h3>{activity.title}</h3>
           <p>{activity.description}</p>
@@ -28,61 +27,68 @@ import SectionHeading from "./SectionHeading.astro";
 </section>
 
 <style>
-  .list {
+  .grid {
     display: grid;
-    gap: 0.75rem;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .row {
+  .item {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 0.25rem 1rem;
-    align-items: center;
-    padding: 1.125rem 1.25rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition:
-      background-color 0.2s,
-      border-color 0.2s;
+    column-gap: 1.25rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--border);
   }
 
-  .row:hover {
-    background: var(--surface-hover);
-    border-color: var(--accent);
+  .item:last-child {
+    border-bottom: 1px solid var(--border);
   }
 
-  .icon {
+  .tile {
     grid-row: span 2;
-    display: grid;
-    place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 10px;
-    background: rgb(37 230 187 / 0.1);
-    color: var(--accent);
   }
 
   h3 {
-    font-size: 1.0625rem;
+    font-size: 1.25rem;
     font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
   p {
+    margin-top: 0.5rem;
     color: var(--muted);
-    font-size: 0.9375rem;
+    font-size: 1rem;
   }
 
-  @media (min-width: 44rem) {
-    .row {
-      grid-template-columns: auto 16rem 1fr;
+  /* Five columns divided by thin rules, as on the poster. */
+  @media (min-width: 64rem) {
+    .grid {
+      grid-template-columns: repeat(5, 1fr);
     }
 
-    .icon {
+    .item {
+      grid-template-columns: 1fr;
+      align-content: start;
+      padding: 0 1.5rem;
+      border-top: 0;
+      border-left: 1px solid var(--border);
+    }
+
+    .item:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .item:last-child {
+      padding-right: 0;
+      border-bottom: 0;
+    }
+
+    .tile {
       grid-row: auto;
+      margin-bottom: 1.25rem;
     }
   }
 </style>

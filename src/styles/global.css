@@ -1,25 +1,28 @@
 :root {
-  /* Palette taken from the RAU DEV deck. */
-  --bg: #051928;
-  --surface: #08273a;
-  --surface-hover: #0b3149;
-  --border: #18495b;
+  /* Palette sampled from the RAU DEV poster. */
+  --bg: #031827;
+  --surface: #08263a;
+  --surface-hover: #0b3049;
+  --border: #17435a;
   --text: #f8fbfd;
-  --muted: #b7ccd8;
-  --accent: #25e6bb;
-  --accent-soft: #b5ffe8;
-  --xp: #ffff00;
-  --blue: #44a4eb;
-  --purple: #b16eff;
-  --amber: #ffbe4c;
+  --muted: #b3c6d3;
+  --accent: #72f6cd;
+  --accent-soft: #b4fbe5;
+  --mint-card: #d4fdf0;
+  --ink: #101c47;
+  --green: #0e8f5f;
+  --blue: #69aae2;
+  --amber: #f2b866;
+  --purple: #a283ee;
+  --pink: #f27ac0;
 
+  --font-display: "Montserrat Variable", var(--font-sans);
   --font-sans:
     "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono:
-    "JetBrains Mono Variable", ui-monospace, "Cascadia Code", Menlo, monospace;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, Menlo, monospace;
 
-  --radius: 12px;
-  --radius-lg: 28px;
+  --radius: 14px;
+  --radius-lg: 24px;
   --gutter: clamp(1rem, 4vw, 2.5rem);
   --max-width: 72rem;
 
@@ -43,7 +46,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.0625rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -52,11 +55,13 @@ h1,
 h2,
 h3 {
   margin: 0;
-  line-height: 1.15;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
-p {
+p,
+dl,
+dd {
   margin: 0;
 }
 
@@ -91,8 +96,45 @@ a:hover {
   padding-block: clamp(4rem, 10vw, 7rem);
 }
 
-.mono {
-  font-family: var(--font-mono);
+/* Widely tracked capitals, as in the poster's labels. */
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Tinted icon tile; `tone-*` picks the colour. */
+.tile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 14px;
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tone) 28%, transparent);
+}
+
+.tone-mint {
+  --tone: var(--accent);
+}
+
+.tone-blue {
+  --tone: var(--blue);
+}
+
+.tone-amber {
+  --tone: var(--amber);
+}
+
+.tone-purple {
+  --tone: var(--purple);
+}
+
+.tone-green {
+  --tone: #3ddc97;
 }
 
 .visually-hidden {
