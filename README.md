@@ -30,7 +30,7 @@ src/
   data/content.ts    All page copy: activities, meeting details, sign-up link, challenges
   layouts/           Base HTML document (meta tags, fonts, global styles)
   lib/               Framework-free logic with unit tests
-  pages/             Routes: `/` and `404`
+  pages/             Routes: `/`, `404`, `robots.txt`, `.well-known/security.txt`
   styles/global.css  Design tokens (colours and type) matching the club poster
 ```
 
